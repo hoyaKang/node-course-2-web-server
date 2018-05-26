@@ -2,6 +2,8 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+const port = process.env.PORT || 3000; // 3000 : default 
+//process.env : stores all of environment variables as key value pairs
 const app = express();
 
 //resgisterPartials() : takes the directory you want to use of all of you handlebar partials files
@@ -27,9 +29,9 @@ app.use((req, res, next) => {
     //next()가 없으면 여기서 멈추므로 아래의 핸들러들(get() 등)도 실행되지 못한다.
 });
 
-app.use((req, res, next) => {
-    res.render('maintenance.hbs');
-});
+// app.use((req, res, next) => {
+//     res.render('maintenance.hbs');
+// });
 // 어떤 url로 접속하던지 maintenance를 렌더링한다. 웹사이트를 막을 때 사용할 수 있다.
 
 app.use(express.static(__dirname + '/public'));
@@ -71,7 +73,7 @@ app.get('/bad', (req, res) => {
 });
 
 //listen() : binds the app to the port on our machine
-app.listen(3000, () => {
-    console.log('Server is up on port 3000');
+app.listen(port, () => {
+    console.log(`Server is up on port ${port}`);
 });
-
+//heroku port를 dynamically하게 바인드하기 위해 환경변수를 설정한다.
