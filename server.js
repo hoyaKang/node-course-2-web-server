@@ -65,6 +65,11 @@ app.get('/about', (req, res) => {
     //render : render any of the templates you have set up with your current view engine
 });
 
+app.get('/projects', (req, res) => {
+    res.render('projects.hbs', {
+        pageTitle: 'Projects'
+    });
+});
 
 app.get('/bad', (req, res) => {
     res.send({
